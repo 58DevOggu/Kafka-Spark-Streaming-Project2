@@ -36,9 +36,10 @@ def run_spark_job(spark):
         .option("subscribe", "com.udacity.sfcrime.police.calls") \
         .option("startingOffsets", "earliest") \
         .option("maxOffsetsPerTrigger", 3000) \
+        .option("spark.default.parallelism" : 100) \
         .option("maxRatePerPartition", 1000) \
-        .option("spark.sql.inMemoryColumnarStorage.batchSize", 10000) \
-        .option("spark.sql.shuffle.partitions", 1000) \
+        .option("spark.streaming.backpressure.enabled", 1000) \
+        .option("spark.sql.shuffle.partitions", 100) \
         .option("stopGracefullyOnShutdown", "true") \
         .load()
 
